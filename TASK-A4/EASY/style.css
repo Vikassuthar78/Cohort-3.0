@@ -626,16 +626,18 @@ body{
     grid-area:girl;
 
     height:280px;
-    background:#ffe600;
+
+    overflow:hidden;
+
+    border-radius:30px;
 }
 
-#girl-img{
+.girl-card img{
 
     width:100%;
     height:100%;
-position: absolute;
-
     object-fit:cover;
+    object-position:center top;
 }
 
 
