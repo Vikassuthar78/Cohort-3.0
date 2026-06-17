@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOM Explorer: Advanced Interactive Task Manager</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header>
+        <h2>Advanced Task Manager</h2>
+        <button id="theme-toggle">Toggle Theme</button>
+    </header>
+
+    <div class="container">
+        <form id="task-form">
+            <input type="text" id="task-title" placeholder="Enter task title..." required>
+            <select id="task-category" required>
+                <option value="" disabled selected>Select Category</option>
+                <option value="Work">Work</option>
+                <option value="Personal">Personal</option>
+                <option value="Urgent">Urgent</option>
+            </select>
+            <button type="submit">Add Task</button>
+        </form>
+    </div>
+
+    <div class="container controls-grid">
+        <div class="search-filters">
+            <input type="text" id="search-input" placeholder="Search tasks by title...">
+            <select id="filter-category">
+                <option value="All">All Categories</option>
+                <option value="Work">Work</option>
+                <option value="Personal">Personal</option>
+                <option value="Urgent">Urgent</option>
+            </select>
+        </div>
+        
+        <div class="counters-row">
+            <div class="counter-badge">Pending: <span id="count-pending">0</span></div>
+            <div class="counter-badge">Completed: <span id="count-completed">0</span></div>
+            <button id="clear-all-btn" class="btn-delete">Clear All Tasks</button>
+        </div>
+    </div>
+
+    <div id="task-container" class="task-list"></div>
+
+    <script src="script.js"></script>
+</body>
+</html>
