@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Register — FinTrack Pro</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<div class="auth-page">
+  <div class="auth-card">
+    <div class="auth-brand">
+      <div class="brand-mark">₣</div>
+    </div>
+    <h1 class="auth-title">Create Account</h1>
+    <p class="auth-sub">Register for FinTrack Pro</p>
+
+    <div class="auth-error" id="authError"></div>
+
+    <form onsubmit="handleRegister(event)">
+      <div class="field">
+        <label>Username</label>
+        <input type="text" id="regUsername" autocomplete="username" placeholder="Choose a username">
+      </div>
+      <div class="field">
+        <label>Password</label>
+        <input type="password" id="regPassword" autocomplete="new-password" placeholder="At least 4 characters">
+      </div>
+      <div class="field">
+        <label>Confirm Password</label>
+        <input type="password" id="regConfirm" autocomplete="new-password" placeholder="Re-enter your password">
+      </div>
+      <button type="submit" class="btn btn-primary">Create Account</button>
+    </form>
+
+    <p class="auth-foot">Already have an account? <a href="index.html">Login here</a></p>
+  </div>
+</div>
+
+<script src="js/script.js"></script>
+</body>
+</html>

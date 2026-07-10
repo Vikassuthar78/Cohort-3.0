@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Settings — FinTrack Pro</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body data-auth-required="true">
+
+<nav class="topbar">
+  <div class="brand">
+    <div class="brand-mark">₣</div>
+    <div class="brand-text">
+      <h1>FinTrack Pro</h1>
+      <span>Personal Finance</span>
+    </div>
+  </div>
+  <div class="nav-links">
+    <a class="nav-link-btn" href="dashboard.html">Dashboard</a>
+    <a class="nav-link-btn active" href="settings.html">Settings</a>
+  </div>
+  <div class="nav-actions">
+    <button class="btn btn-ghost" onclick="handleLogout()">⎋ Logout</button>
+  </div>
+</nav>
+
+<main>
+  <section class="page active">
+    <div class="page-head">
+      <h2>Settings</h2>
+      <p>Your profile, currency, and app preferences.</p>
+    </div>
+
+    <div class="settings-grid">
+      <div class="panel">
+        <h3>Profile</h3>
+        <div class="field">
+          <label>Display Name</label>
+          <input type="text" id="settingName" placeholder="e.g. Vikas">
+        </div>
+        <div class="field">
+          <label>Preferred Currency</label>
+          <select id="settingCurrency">
+            <option value="USD">USD — US Dollar ($)</option>
+            <option value="EUR">EUR — Euro (€)</option>
+            <option value="GBP">GBP — British Pound (£)</option>
+            <option value="INR">INR — Indian Rupee (₹)</option>
+            <option value="JPY">JPY — Japanese Yen (¥)</option>
+          </select>
+        </div>
+        <button class="btn btn-primary" onclick="saveProfile()">Save Profile</button>
+      </div>
+
+      <div class="panel">
+        <h3>Preferences</h3>
+        <div class="toggle-row">
+          <div>
+            <div style="font-weight:700; font-size:14px;">Dark Mode</div>
+            <div style="font-size:12.5px; color:var(--text-soft);">Switch between light and dark themes</div>
+          </div>
+          <label class="switch">
+            <input type="checkbox" id="darkToggle" onchange="toggleDark()">
+            <span class="slider"></span>
+          </label>
+        </div>
+        <hr style="border:none; border-top:1px solid var(--border); margin:18px 0;">
+        <div style="font-weight:700; font-size:14px; margin-bottom:4px;">Reset All Data</div>
+        <div style="font-size:12.5px; color:var(--text-soft); margin-bottom:12px;">
+          Permanently deletes every transaction and preference stored in this browser.
+        </div>
+        <button class="btn btn-danger" style="width:100%;" onclick="resetAllData()">🗑 Reset All Data</button>
+      </div>
+    </div>
+  </section>
+</main>
+
+<div class="toast" id="toast"></div>
+
+<script src="js/script.js"></script>
+</body>
+</html>
