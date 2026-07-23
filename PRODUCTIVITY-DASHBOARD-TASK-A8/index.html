@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Daily Ops — Productivity Dashboard</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body data-theme="dark" data-period="morning">
+
+<div class="grain"></div>
+
+<div class="app-shell">
+
+  <!-- ===== Topbar : always-visible widgets ===== -->
+  <header class="topbar">
+    <div class="brand">
+      <span class="brand-mark">◈</span>
+      <span class="brand-text">DAILY&nbsp;OPS</span>
+    </div>
+
+    <div class="status-cluster">
+      <div class="readout clock-widget" id="clock-widget">
+        <span class="readout-label">LOCAL TIME</span>
+        <span class="readout-value mono" id="clock-time">--:--:--</span>
+        <span class="readout-sub" id="clock-date">-- --- ----</span>
+      </div>
+
+      <div class="readout weather-widget" id="weather-widget" aria-live="polite">
+        <span class="readout-label">CONDITIONS</span>
+        <div class="weather-body" id="weather-body">
+          <span class="weather-icon" id="weather-icon">⋯</span>
+          <span class="readout-value mono" id="weather-temp">--°</span>
+        </div>
+        <span class="readout-sub" id="weather-place">Locating…</span>
+      </div>
+
+      <button class="theme-toggle" id="theme-toggle" aria-label="Switch color theme" aria-pressed="false">
+        <span class="toggle-track">
+          <span class="toggle-thumb"></span>
+        </span>
+        <span class="toggle-label" id="theme-toggle-label">Dark</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- ===== Dashboard (home) ===== -->
+  <main class="dashboard" id="dashboard">
+    <section class="hero">
+      <p class="hero-eyebrow" id="hero-eyebrow">Systems nominal</p>
+      <h1 class="hero-title">Good <span id="greeting-period">morning</span>, operator.</h1>
+      <p class="hero-sub">Five instruments below. Pick one to bring it up full screen.</p>
+    </section>
+
+    <div class="card-grid" id="card-grid">
+      <button class="tile" data-feature="todo">
+        <span class="tile-tag">TODO&nbsp;LIST</span>
+        <span class="tile-glyph">☑</span>
+        <span class="tile-title">Task Queue</span>
+        <span class="tile-meta" id="tile-meta-todo">0 open</span>
+      </button>
+
+      <button class="tile" data-feature="planner">
+        <span class="tile-tag">PLANNER</span>
+        <span class="tile-glyph">▤</span>
+        <span class="tile-title">Daily Planner</span>
+        <span class="tile-meta" id="tile-meta-planner">Hour by hour</span>
+      </button>
+
+      <button class="tile" data-feature="goals">
+        <span class="tile-tag">GOALS</span>
+        <span class="tile-glyph">◎</span>
+        <span class="tile-title">Daily Goals</span>
+        <span class="tile-meta" id="tile-meta-goals">0 of 0 done</span>
+      </button>
+
+      <button class="tile" data-feature="pomodoro">
+        <span class="tile-tag">FOCUS&nbsp;TIMER</span>
+        <span class="tile-glyph">◷</span>
+        <span class="tile-title">Pomodoro</span>
+        <span class="tile-meta" id="tile-meta-pomodoro">25:00 · Work</span>
+      </button>
+
+      <button class="tile" data-feature="quote">
+        <span class="tile-tag">MOTIVATION</span>
+        <span class="tile-glyph">❝</span>
+        <span class="tile-title">Quote of the Moment</span>
+        <span class="tile-meta">Fresh words on demand</span>
+      </button>
+    </div>
+  </main>
+
+  <!-- ===== Full-screen feature view ===== -->
+  <div class="feature-view" id="feature-view" hidden>
+    <button class="back-btn" id="back-btn">
+      <span aria-hidden="true">←</span> Dashboard
+    </button>
+
+    <!-- TODO LIST -->
+    <section class="feature-panel" data-panel="todo" hidden>
+      <header class="panel-head">
+        <span class="panel-tag">TODO LIST</span>
+        <h2>Task Queue</h2>
+      </header>
+
+      <form class="add-row" id="todo-form">
+        <input type="text" id="todo-input" placeholder="Add a task…" autocomplete="off" maxlength="140" aria-label="New task text" />
+        <button type="submit" class="btn-primary">Add task</button>
+      </form>
+
+      <ul class="item-list" id="todo-list" aria-live="polite"></ul>
+      <p class="empty-hint" id="todo-empty">No tasks yet. Add your first one above.</p>
+    </section>
+
+    <!-- DAILY PLANNER -->
+    <section class="feature-panel" data-panel="planner" hidden>
+      <header class="panel-head">
+        <span class="panel-tag">PLANNER</span>
+        <h2>Daily Planner</h2>
+      </header>
+      <div class="slot-list" id="slot-list"></div>
+    </section>
+
+    <!-- DAILY GOALS -->
+    <section class="feature-panel" data-panel="goals" hidden>
+      <header class="panel-head">
+        <span class="panel-tag">GOALS</span>
+        <h2>Daily Goals</h2>
+      </header>
+
+      <form class="add-row" id="goal-form">
+        <input type="text" id="goal-input" placeholder="Set a goal for today…" autocomplete="off" maxlength="100" aria-label="New goal text" />
+        <button type="submit" class="btn-primary">Add goal</button>
+      </form>
+
+      <div class="progress-block">
+        <div class="progress-track"><div class="progress-fill" id="goal-progress-fill"></div></div>
+        <span class="progress-text mono" id="goal-progress-text">0 of 0 completed</span>
+      </div>
+
+      <ul class="item-list" id="goal-list" aria-live="polite"></ul>
+      <p class="empty-hint" id="goal-empty">No goals yet. What matters most today?</p>
+    </section>
+
+    <!-- POMODORO -->
+    <section class="feature-panel feature-panel--center" data-panel="pomodoro" hidden>
+      <header class="panel-head">
+        <span class="panel-tag">FOCUS TIMER</span>
+        <h2>Pomodoro</h2>
+      </header>
+
+      <div class="pomodoro-wrap">
+        <div class="dial-wrap">
+          <svg class="dial" viewBox="0 0 200 200" aria-hidden="true">
+            <circle class="dial-track" cx="100" cy="100" r="88"></circle>
+            <circle class="dial-progress" id="dial-progress" cx="100" cy="100" r="88"></circle>
+          </svg>
+          <div class="dial-center">
+            <span class="dial-session" id="dial-session">Work Session</span>
+            <span class="dial-time mono" id="dial-time">25:00</span>
+          </div>
+        </div>
+
+        <div class="timer-controls">
+          <button class="btn-secondary" id="timer-reset">Reset</button>
+          <button class="btn-primary btn-primary--wide" id="timer-toggle">Start</button>
+          <button class="btn-secondary" id="timer-skip">Skip</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- MOTIVATION QUOTE -->
+    <section class="feature-panel feature-panel--center" data-panel="quote" hidden>
+      <header class="panel-head">
+        <span class="panel-tag">MOTIVATION</span>
+        <h2>Quote of the Moment</h2>
+      </header>
+
+      <div class="quote-card" aria-live="polite">
+        <p class="quote-text" id="quote-text">Loading a thought worth keeping…</p>
+        <p class="quote-author" id="quote-author"></p>
+      </div>
+
+      <button class="btn-primary" id="quote-refresh">New quote</button>
+    </section>
+  </div>
+
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
